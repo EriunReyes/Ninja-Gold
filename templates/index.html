@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ninja Money</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="gold">
+        <form action="">
+            <label for="">Your Gold:{{session['gold']}}</label>
+            <label for="">Your Chances:{{session['chances']}}</label>
+            <label for="">Try to get this golds {{session['found']}}</label>
+        </form>
+        <button>
+            <a class="reset" href="/reset" class="btn btn-danger btn-sm" style="margin:auto; width: 100px">Reset</a>
+        </button>
+    </div>
+
+    <div class="container">
+        <form action="/process_money" method="post">
+            <input type="hidden" name="place" value="farm">
+            <div class="areas">Farm
+                <p>(earn 10-20 golds)</p>
+                <br>
+                <button>Find Gold!</button>
+            </div>
+        </form>
+        <form action="/process_money" method="post">
+            <input type="hidden" name="place" value="cave">
+            <div class="areas">Cave
+                <p>(earn 5-10 golds)</p>
+                <br>
+                <button>Find Gold!</button>
+            </div>
+        </form>
+
+        <form action="/process_money" method="post">
+            <input type="hidden" name="place" value="house">
+            <div class="areas">House
+                <p>(earn 2-5 golds)</p>
+                <br>
+                <button>Find Gold!</button>
+            </div>
+        </form>
+
+        <form action="/process_money" method="post">
+            <input type="hidden" name="place" value="casino">
+            <div class="areas">Casino
+                <p>(earn/takes 0-50 golds)</p>
+                <br>
+                <button>Find Gold!</button>
+            </div>
+        </form>
+        <div>
+            <form class='activities' action="/process_money" method="post">
+                <label for="Activities">Activities:</label>
+                <textarea name="Activities" id="Activities" cols="30" rows="10" style="font-weight: bold; font-style: italic">
+                    {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                          
+                        {% for message in messages %}            
+                            {{message}}                  
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </textarea>
+            </form>
+        </div> 
+    </div> 
+</body>
+</html>
